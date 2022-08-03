@@ -1,0 +1,293 @@
+{% extends "master.html" %}
+
+{% block content %}
+    <div class="content-header">
+        <div class="container-fluid">
+        </div>
+    </div>
+
+    <div class="content" style="margin-left: 15px; margin-right: 15px;">
+        <div class="row">
+
+            <div class="col-12">
+                <h5 class="text-bold text-uppercase">Phân vùng, Phân loại Xuất Huyết Não trên môi trường Apache Spark (BIGDL)</h5>
+            </div>
+
+            <div class="col-12 div-upload-file">
+                <div class="bg" style="padding: 20px; background-color: #3d99f5; border-radius: 5px;">
+                    <div class="style-upload"></div>
+                    <div style="border: 2px dashed #e4e9f0; padding: 40px;" class="text-center ">
+                        <label for="chon-file" class="text-center block">
+                            <img src="static/images/upload-white.png" height="100" width="100" class="img-fluid anh-buon">
+                        </label>
+                        <label for="chon-file" style="color: white; font-weight: bold;" class="thong-bao">
+                            Chọn tệp tin DICOM (*.DICOM)
+                        </label>
+                        <input type="file" class="hide" id="chon-file">
+                    </div>
+                </div>
+
+                <br>
+                <p style="color: black; font-weight: bold;">File dữ liệu mẫu:
+                {% for item in data %}
+                    <a style="font-weight: bold;" target="_blank" href="/static/dicom/xhn/{{ item }}" download>
+                        {{ item }},
+                    </a>
+                {% endfor %}
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="row div-anh-dicom pd-top-20 hide">
+            <div class="col-12 ">
+                <div class="border-top pd-top-20"></div>
+            </div>
+            <div class="col-6">
+                <p class="f-20 b">#Ảnh não (từ tệp DICOM)</p>
+                <img src="#" style="width: 350px;" class="border img-fluid text-center border-radius-10 anh">
+            </div>
+            <div class="col-6">
+                <p class="f-20 b">#Thông tin Ca Bệnh</p>
+                <table class="table" style="border: 1px solid #eee;">
+                    <thead>
+                        <tr>
+                            <th>Header</th>
+                            <th>Tag Desscription</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row div-nhan-dang pd-top-20 hide">
+            <div class="col-12 ">
+                <div class="border-top pd-top-20"></div>
+            </div>
+            <div class="col-12">
+                <p class="f-25 b"># Kết quả (Phân vùng, Phân loại xuất huyết não)</p>
+                <div class="row">
+                    <div class="col-md-4 div-anh-kq">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="col-12">
+                            <div class="row nao-that hide">
+                                <div class="col-12">
+                                    <p class="f-25 b" style="color: #4183D7;">Xuất huyết não thất (ICH)</p>
+                                    <p><strong><em>Định nghĩa</em>:</strong> Là loại xuất huyết trong não thất.</p>
+                                    <p><em><strong>Nguyên nhân</strong>:</em> Do rách các mạnh máu thành não thất, mạch mạc hoặc
+                                        chảy
+                                        máu từ nhu mô não lân cận vào não thất.</p>
+                                    <p><em><strong>Đặc điểm CT</strong>:</em> Tăng độ đậm trong não thất, Não thất ngập máu, có
+                                        thể lan
+                                        qua các não thất khác. Trên phim, thường có hình mực dịch – máu </p>
+                                </div>
+                            </div>
+                            <div class="row duoi-man-cung hide">
+                                <div class="col-12">
+                                    <p class="f-25 b" style="color: #4183D7;">Tụ máu dưới màn cứng (SDH)</p>
+                                    <p><strong><em>Định nghĩa</em>:</strong> Tụ máu dưới màn cứng là tụ máu ở khoang dưới màng
+                                        cứng;
+                                        khoang giữa màn cứng và màng nhện.</p>
+                                    <p><strong><em>Nguyên nhân:</em></strong> Do căng, rách tĩnh mạch cầu nối ở võ não, khi các
+                                        tĩnh
+                                        mạch đi qua khoang dưới nhện vào xoang tĩnh mạch màng cứng.</p>
+                                    <p><strong><em>Đặc điểm CT:</em></strong> Vị trí hay gặp tầng trên lều, vùng trán đỉnh, hố
+                                        não giữa,
+                                        cạnh liềm não, thường một bên ở người lớn, hai bên trở trẻ em (80-85%).</p>
+                                </div>
+                            </div>
+                            <div class="row ngoai-man-cung hide">
+                                <div class="col-12">
+                                    <p class="f-25 b" style="color: #4183D7;">Tụ máu ngoài màn cứng (EDH)</p>
+                                    <p><em><strong>Định nghĩa</strong>:</em> Tụ máu ngoài màn cứng là tụ máu ở khoang giữa bạn
+                                        sọ trong
+                                        và mang cứng.</p>
+                                    <p><em><strong>Nguyên nhân</strong>:</em> Do tổn thương động mạch (90%), tĩnh mạch tủy
+                                        xương, xoang
+                                        và các tĩnh mạch màng cứng (10%).</p>
+                                    <p><strong><em>Đặc điểm CT:</em></strong> Vị trí thường gặp ở tầng trên liều 95%. Hay gặp ở
+                                        thái
+                                        dương – đỉnh 67%, ít gặp hơn ở trán, chẩm. Vùng dưới liều gặp 5-10%, thường do tổn
+                                        thương xoang
+                                        tĩnh mạch màn cứng. Độ đậm khối tụ máu có thể cao (2/3 trường hợp) hay hổn hợp  (cao,
+                                        thấp trong
+                                        1/3 trường hợp). Khối máu có thể có các cùng đậm độ rất thấp bên trong do máu đang chảy,
+                                        chưa
+                                        đông cục máu – còn gọi là dấu hiểu ‘dòng xoáy’.</p>
+                                </div>
+                            </div>
+                            <div class="row khoan-nhen hide">
+                                <div class="col-12">
+                                    <p class="f-25 b" style="color: #4183D7;">Xuất huyết khoang dưới nhện (SAH)</p>
+                                    <p><em><strong>Định nghĩa</strong>:</em> Xuất huyết khoang dưới nhện là xuất huyết ở khoang
+                                        dưới
+                                        nhện, khoang giữa màn nhện và màng mềm.</p>
+                                    <p><em><strong>Nguyên nhân</strong>:</em> Do tổn thương mạch máu trong khoang dưới nhện.</p>
+                                    <p><em><strong>Đặc điểm CT</strong>:</em> Vị trí thường khu trú quang vùng dập não, vỡ sọ,
+                                        rãnh liên
+                                        bán cầu hoặc lan tỏa theo khoang dưới nhện, các bể não tủy, lều não.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <h4 class="text-bold">1. PHƯƠNG PHÁP ĐỀ XUẤT</h4>
+                <h6 class="text-bold">
+                    Kiến trúc tổng quát pha huấn luyện mô hình phân tán
+                </h6>
+                <img style="width: 100%" src="/static/images/SCR-20220711-fgi.png" alt="">
+
+                <p>- Chuyển đổi tập dữ liệu từ HDFS vào các RDD của Apache Spark</p>
+                <p>- Chuyển đổi các RDD sang DataFrame (DF)</p>
+                <p>- Chia dữ liệu trên DF sang hai phần (Tập huấn luyện 80% và tập kiểm thử 20%)</p>
+                <p>- Đọc dữ liệu và nhãn trên tập dữ liệu đầu vào (DF)</p>
+                <p>- Trích xuất đặc trưng trên ảnh đầu vào thành các vector</p>
+
+                <br>
+                <h6><b>Bước 2: Huấn luyện mô hình mạng theo hướng song song dữ liệu và song song tính toán:</b></h6>
+                <p>- Dữ liệu huấn luyện từ Pipeline được chia thành các minibatch và được chuyển đến các cluster tính toán</p>
+                <p>- Qua mỗi bước huấn luyện (epoch) thông số huấn luyện được đồng bộ về máy chủ tham số thông qua Data Shards</p>
+                <p>- Máy chủ tham số tổng hợp và tạo mô hình mạng trung tâm để đánh giá độ lệch (loss) so với dữ liệu đã được đưa vào huấn luyện từ đó hiệu chỉnh learning rate cho bước học tiếp theo ở các máy cluster.</p>
+
+                <h4 class="text-bold">2. KẾT QUẢ THỰC NGHIỆM</h4>
+
+                <p>Nội dung này sẽ trình bày kết quả từ thực nghiệm đã thực hiện trong đề tài theo hai kịch bản: Môi trường xử lý trên máy tính đơn và môi trường xử lý song song theo hướng tiếp cận dữ liệu lớn trên môi trường Apache Spark.</p>
+
+                <h4 class="text-bold">a. Môi trường thực nghiệm và tập dữ liệu huấn luyện</h4>
+
+                Tập dữ liệu huấn luyện mô hình mạng được sử dụng bao gồm 479 ảnh xuất huyết não dưới dạng tệp tin DICOM sau đó được tiền xử lý ảnh theo chỉ số HU giúp khoanh vùng trọn vẹn vùng xuất huyết điều này giúp tạo nên tập dữ liệu có độ chính xác cao.
+
+                <p class="text-center" ><img style="width: 70%" src="/static/images/SCR-20220711-fti.png" alt=""></p>
+
+                <h4 class="text-bold">Kịch bản 1: Xử lý trong môi trường máy tính đơn</h4>
+
+                Trong quá trình huấn luyện tôi chọn giá trị 512x512px cho kích thước ảnh đầu vào và giá trị Learning rate ở mức 0.00003 trong suốt quá hình huấn luyện. Hình 50 thể hiện giá trị Classification Loss và Localization Loss của mạng Faster R-CNN và R-FCN, qua hình ảnh có thể thấy biểu đồ của mô hình mạng R-FCN giảm sâu và ổn định hơn khi so với mô hình mạng Faster R-CNN (xem Hình 50.b, 50.c, 50.e và 50.f). Qua giá trị Total Loss thì mạng Faster R-CNN đạt 0.0056 cao hơn giá trị 0.017 của mạng R-FCN từ đó có thể kết luận với tập dữ liệu y khoa được sử dụng để thực nghiệm trong nghiên cứu này có hiệu quả hơn khi thực hiện với mô hình mạng R-FCN.
+
+                <p class="text-center" ><img style="width: 70%" src="/static/images/SCR-20220711-fsw.png" alt=""></p>
+
+                <h4 class="text-bold">Kịch bản 2: Xử lý song song theo hướng tiếp cận dữ liệu lớn trên môi trường Apache Spark</h4>
+                Khi so sánh độ chính xác theo thang đo AP trên 4 trường hợp khi thay đổi số lượng cluster trong cụm tính toán có thể thấy sự chệnh lệnh nhỏ về độ chính xác (xem Hình 57). Giải thích cho sự chênh lệch này đến từ lỗi phát sinh trong quá trình truyền nhận dữ liệu qua hệ thống mạng. Cụ thể, các cluster nhận dữ liệu tính toán, chia sẽ vùng nhớ đệm, tổng hợp kết quả tính toán thông qua hệ thống mạng. Việc một gói tin truyền lỗi hoặc sai lệch dữ liệu là điều không tránh khỏi điều này dẫn đến quá trình tổng hợp tham số huấn luyện hoặc tạo dựng mô hình mạng trung gian không được liên tục gây mất thêm thời gian cho quá trình tổng hợp kết quả.
+                <p class="text-center" ><img style="width: 70%" src="/static/images/SCR-20220711-fvf.png" alt=""></p>
+
+                <h4 class="text-bold">3. KẾT LUẬN</h4>
+                <p>Trong nghiên cứu ngày, tôi đề xuất hướng tiếp cận mới dựa trên giá trị HU và kỹ thuật mạng nơ-ron trên hai kịch bản xử lý bao gồm: Xử lý trên môi trường máy tính đơn; Xử lý song song hướng tiếp cận dữ liệu lớn trên môi trường Apache Spark. Phương pháp đề xuất của tôi áp dụng giá trị HU giúp phân loại chính xác vùng xuất huyết, định lượng thời gian và mức độ tổn thương vùng xuất huyết não nhằm hỗ trợ hiệu quả cho các bác sĩ trong chẩn đoán. Qua thực nghiệm, mô hình mạng R-FCN cho kết quả phân loại với độ chính xác cao hơn Faster R-CNN vì độ chính xác trung bình (độ đo mAP) đạt 87% và có thời gian phân loại trung bình nhanh hơn. Trong khi đó với mô hình mạng SSD trên môi trường Apache Spark thì thời gian huấn luyện được cải thiện 50.5% khi tăng số lượng cluster tăng lên 3, độ chính xác về phân lớp đạt được theo thang đo AP đạt 90.75% điều này khẳng định những ưu điểm khi triển khai các bài toán có lượng tính toán lớn trên môi trường Apache Spark giúp tiết kiệm thời gian huấn luyện và phát hiện vùng xuất não trên ảnh CT/MRI.</p>
+            </div>
+
+            <br><br><br>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+        var thong_tin = {
+            filename: '',
+            url: 'http://cangpa.vlute.edu.vn/api/xhn'
+        }
+        $(document).ready(function () {
+
+        });
+
+        $('#chon-file').change(function () {
+            $('.content').waitMe({});
+            var formData = new FormData();
+            formData.append("file", document.getElementById("chon-file").files[0]);
+            $.ajax({
+                url: thong_tin.url + "/upload",
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                xhr: function () {
+                    var xhr = $.ajaxSettings.xhr();
+                    xhr.upload.onprogress = function (e) {
+                        var giaTri = Math.floor(e.loaded / e.total * 100);
+                        $('.style-upload').css('width', 'calc(' + giaTri + '% + 40px)');
+                    };
+                    return xhr;
+                },
+                success: function (response) {
+                    if (response.status === 200) {
+                        toastr.success("Tên tệp: " + response.filename, "Tải lên thành công");
+                        $('.anh').attr('src', thong_tin.url + "/static/dicom/png/" + response.filename + ".png")
+                        $.map(JSON.parse(response.thongtin), function (value) {
+                            $('table tbody').append("<tr>" +
+                                "<td> (" + value.GroupTag + ", " + value.ElementTag +
+                                ") </td>" +
+                                "<td>" + value.TagDesscription + "</td>" +
+                                "<td>" + value.Value + "</td>" +
+                                "</tr>");
+                        });
+
+                        // Lưu thông tin
+                        thong_tin.filename = response.filename + ".png";
+                        $(".div-anh-dicom").removeClass('hide');
+                        $('html, body').animate({ scrollTop: $(".div-anh-dicom").offset().top }, 500);
+                        nhanDang(thong_tin.filename);
+                        $('.content').waitMe("hide");
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        function nhanDang(filename) {
+            $('.div-anh-kq').empty();
+            $.ajax({
+                url: thong_tin.url + '/nhan-dang',
+                type: 'POST',
+                data: { "filename": filename },
+                success: function (response) {
+                    $.map(response[0], function (item) {
+                        var tmp = "data:image/png;base64, " + item.image;
+                        $('.div-anh-kq').append('<img src="' + tmp + '" style="width: 350px;" class="border img-fluid text-center border-radius-10 kq">');
+                    });
+
+
+                    $.map(response[1], function (value) {
+                        console.log(value.class)
+                        if (parseInt(value.class) === 4) {
+                            $('.nao-that').removeClass('hide');
+                        }
+
+                        if (parseInt(value.class) === 1) {
+                            $('.duoi-man-cung').removeClass('hide');
+                        }
+
+                        if (parseInt(value.class) === 2) {
+                            $('.ngoai-man-cung').removeClass('hide');
+                        }
+
+                        if (parseInt(value.class) === 3) {
+                            $('.khoan-nhen').removeClass('hide');
+                        }
+                    });
+
+                    $('.div-nhan-dang').show();
+                    $('html, body').animate({
+                        scrollTop: $(".div-nhan-dang").offset().top
+                    }, 500);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+    </script>
+{% endblock %}
