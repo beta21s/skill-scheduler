@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Điểm danh - Mắt không thấy, tim không đau</title>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="/static/css/themes.min.css">
+    <link rel="stylesheet" href="/static//css/lte.min.css">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <a href="#" class="h1"><b>53 - ĐIỂM DANH</b></a>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">Bạn có phải là một Sinh viên chăm chỉ?</p>
+
+            <form action="{{ url_for("postLuuFileAnh") }}" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="exampleInputFile" name="file" required>
+                        <label class="custom-file-label" for="exampleInputFile">Tải lên một tệp tin ảnh (*.png,
+                            *.jpg)</label>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ck1">
+                    <label class="form-check-label" for="ck1">Tôi xin hứa không chơi game trong thời gian ôn
+                        luyện</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ck2">
+                    <label class="form-check-label" for="ck2">Tôi xin hứa không sử dụng Zalo để nhắn tin tầm xàm</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ck3">
+                    <label class="form-check-label" for="ck3">Tôi xin hứa không sử dụng thời gian ôn luyện và không ôn
+                        luyện</label>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <br>
+                        <button type="submit" class="btn btn-primary btn-block">Thực hiện điểm danh</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .login-box, .register-box {
+        width: 500px;
+    }
+</style>
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/lte.min.js"></script>
+</body>
+</html>

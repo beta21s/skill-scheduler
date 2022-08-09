@@ -8,7 +8,7 @@ from LuanVan.models.Dicom2Png import Dicom2Png
 from LuanVan.models.DicomInfo import DicomInfo
 import os, glob
 
-path = "/"
+path = "/a-b"
 
 def getListFiles(paths):
     res = []
