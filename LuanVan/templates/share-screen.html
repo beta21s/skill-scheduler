@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hệ thống chia sẻ màn hình - Mắt không thấy, tim không đau</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="/static/css/themes.min.css">
+    <link rel="stylesheet" href="/static/css/lte.min.css">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <a href="#" class="h1"><b>GIÁM SÁT MÀN HÌNH</b></a>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">Đăng nhập để bắt đầu phiên làm việc</p>
+
+            <form action="{{ url_for('postDangNhap') }}" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" name="tendn" class="form-control" placeholder="Mã chia sẻ">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-code"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <br>
+                        <button type="submit" class="btn btn-primary btn-block">Bắt đầu</button>
+                    </div>
+                </div>
+            </form>
+            <button type="button" class="btn btn-primary btn-block divShare" id="startShare">Bắt đầu</button>
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/lte.min.js"></script>
+<script src="/static/js/share-screen.js"></script>
+<script src="/static/js/share-screen/adapter.js"></script>
+<script src="/static/js/share-screen/kurento-client.js"></script>
+<script src="/static/js/share-screen/kurento-utils.js"></script>
+<script type="module">
+    import presenter from '/static/js/share-screen/presenter.js';
+    var presenterObj = new presenter({
+        iceServers: [
+            {urls: "stun:stun.l.google.com:19302"},
+        ],
+        viewID: "1709",
+        pathSocketIO: '',
+        serverSocket: '',
+    });
+
+    presenterObj.stopSharing(() => {
+        presenterObj.onStatusChanged();
+    });
+
+    presenterObj.onStatusChanged = function () {
+        var status = this.sharingStream.display ? 'shared' : 'not shared';
+        switch (status) {
+            case 'shared':
+                $("#startShare").attr("disabled", true);
+                break;
+            default:
+                $("#startShare").attr('disabled', false);
+        }
+    };
+
+    function startShare() {
+        presenterObj.startSharing({
+            mechanism: 'streamserver',
+            maxFrameRate: '15',
+            screenSize: '1360*768',
+            microphone: 'muted'
+        });
+    }
+
+    document.getElementById("startShare").addEventListener("click", startShare);
+
+    window.startPresent = (options, startEvent, stopEvent, failedEvent) => {
+        presenterObj.startSharing(options, startEvent, stopEvent, failedEvent);
+    }
+
+    window.stopPresent = (stopEvent) => {
+        presenterObj.stopSharing(stopEvent);
+    }
+</script>
+
+</body>
+</html>
